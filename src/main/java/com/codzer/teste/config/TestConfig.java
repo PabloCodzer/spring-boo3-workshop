@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.codzer.teste.entities.Category;
 import com.codzer.teste.entities.Order;
+import com.codzer.teste.entities.OrderItem;
 import com.codzer.teste.entities.Products;
 import com.codzer.teste.entities.User;
 import com.codzer.teste.entities.enums.OrderStatus;
 import com.codzer.teste.repositories.CategoryRepository;
+import com.codzer.teste.repositories.OrderItemRepository;
 import com.codzer.teste.repositories.OrderRepository;
 import com.codzer.teste.repositories.ProductRepository;
 import com.codzer.teste.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -55,10 +60,6 @@ public class TestConfig implements CommandLineRunner {
 		Products p4 = new Products(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, ""); 
 		Products p5 = new Products(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, ""); 
 
-
-
-		
-		
 		userRepository.saveAll(  Arrays.asList(u1,u2)  );
 		orderRepository.saveAll( Arrays.asList(o1,o2,o3) );
 		categoryRepository.saveAll( Arrays.asList(cat1,cat2,cat3) );
@@ -72,5 +73,14 @@ public class TestConfig implements CommandLineRunner {
 		p5.getCategory().add(cat2);
 		productRepository.saveAll( Arrays.asList(p1, p2, p3, p4, p5) );
 		
+		
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice()); 
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice()); 
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice()); 
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
+	
+		
+		orderItemRepository.saveAll(Arrays.asList( oi1, oi2, oi3,  oi4)  );
 	}
 }
