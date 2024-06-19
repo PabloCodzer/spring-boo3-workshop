@@ -6,25 +6,25 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.codzer.teste.entities.User;
-import com.codzer.teste.repositories.UserRepository;
+import com.codzer.teste.entities.Products;
+import com.codzer.teste.repositories.ProductRepository;
 
 @Service
-public class UserService {
+public class ProductService {
 
 	@Autowired
 	// Dependecia 
-	private UserRepository repository;
+	private ProductRepository repository;
 	
 	
-	public List<User> findAll()
+	public List<Products> findAll()
 	{
 		return repository.findAll();
 	}
 	
-	public User findById(Long id)
+	public Products findById(Long id)
 	{
-		Optional<User> obj = repository.findById(id);
+		Optional<Products> obj = repository.findById(id);
 		return obj.get();
 	}
 	
