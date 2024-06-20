@@ -51,7 +51,7 @@ public class Order implements Serializable {
 	public Payment getPayment() {
 		return payment;
 	}
-
+	
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
@@ -69,6 +69,16 @@ public class Order implements Serializable {
 	public Set<OrderItem> getItems()
 	{
 		return items;
+	}
+	
+	public Double getTotal()
+	{
+		double soma = 0.0;
+		for(OrderItem x : items)
+		{
+			soma += x.getSubtotal();
+		}
+		return soma;
 	}
 	
 	public Long getId() {
